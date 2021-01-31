@@ -98,7 +98,7 @@ float MedianFilter(Mat input, Mat& output) {
 	cudaEventCreate(&stop);
 	cudaEventRecord(start);
 
-	runMedianFilterSharedKernel << <grid_dim, block_dim >> > (device_input_img, device_output_img, img_width, img_height);
+	runMedianFilterSharedKernel <<<grid_dim, block_dim>>> (device_input_img, device_output_img, img_width, img_height);
 
 	cudaEventRecord(stop);
 	cudaEventSynchronize(stop);
@@ -110,5 +110,5 @@ float MedianFilter(Mat input, Mat& output) {
 
 	float time = 0;
 	cudaEventElapsedTime(&time, start, stop);
-	return time;
+	return time / 1000;
 }

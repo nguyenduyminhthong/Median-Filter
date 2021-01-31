@@ -6,7 +6,7 @@
 using namespace cv;
 using namespace std;
 
-const int EPOCHS = 200;
+const int EPOCHS = 1;
 
 int main() {
 	ios::sync_with_stdio(false);
@@ -14,12 +14,12 @@ int main() {
 	cout.tie(nullptr);
 	Mat input = imread("Input.jpg", IMREAD_GRAYSCALE);
 	Mat output = input.clone();
-	float time = 0;
 
+	float time = 0;
 	time += MedianFilter(input, output);
 	for (int i = 1; i < EPOCHS; ++i) time += MedianFilter(output, output);
 
-	cout << "Time: " << time << "ms\n";
+	cout << "Time: " << time << "s\n";
 
 	imshow("Input", input);
 	imshow("Output", output);
